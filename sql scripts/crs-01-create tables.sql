@@ -1,20 +1,20 @@
 CREATE TABLE `users` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `first_name` varchar(255),
-  `last_name` varchar(255),
-  `address` varchar(255),
+  `first_name` varchar(50),
+  `last_name` varchar(50),
+  `address` varchar(100),
   `created_at` datetime,
-  `email` varchar(255) UNIQUE NOT NULL,
-  `password` password NOT NULL,
+  `email` varchar(50) UNIQUE NOT NULL,
+  `password` varchar(255) NOT NULL,
   `role` int,
   `is_active` boolean DEFAULT true
 );
 
 CREATE TABLE `cars` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `detail` varchar(255),
-  `brand` varchar(255),
-  `model` varchar(255),
+  `detail` varchar(100),
+  `brand` varchar(50),
+  `model` varchar(50),
   `created_at` datetime,
   `is_available` boolean NOT NULL DEFAULT true,
   `is_active` boolean DEFAULT true
@@ -22,7 +22,7 @@ CREATE TABLE `cars` (
 
 CREATE TABLE `roles` (
   `id` int PRIMARY KEY AUTO_INCREMENT,
-  `name` varchar(255),
+  `name` varchar(10),
   `description` varchar(255),
   `created_at` datetime,
   `is_active` boolean DEFAULT true
