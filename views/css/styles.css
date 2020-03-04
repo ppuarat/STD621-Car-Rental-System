@@ -1,0 +1,34 @@
+.blog-header{
+    line-height: 1;
+    border-bottom: 1px solid #e5e5e5;   
+}
+.blog-header-logo {
+    font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+    font-size: 2.25rem;
+}
+.bgImage {
+    background-image: url("../img/main-bg2.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 620px;
+    -webkit-filter: grayscale(50%);
+    filter: grayscale(50%);
+}   
+
+.siteTitle {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: #ffff;
+}
+
+.inline{
+    display: inline !important;
+}
+.floatRight{
+    float: right;
+}

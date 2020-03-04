@@ -1,0 +1,25 @@
+INSERT INTO cars (name, detail, brand, model, transmission, door, seat, daily_rate, is_available, created_at, is_active) 
+VALUES('Economy', 'Small economical cars suitable for the city and short trips', 'Toyota', 'Yaris', 'Automatic Transmission', 5, 4, 150, 1, current_timestamp(), 1);
+('Compact', 'Medium sized cars ideal for small families and 4 passengers', 
+'Mazda', '3', 'Automatic Transmission', 5, 5, 185, 1, current_timestamp(), 1),
+('Compact', 'Medium sized cars ideal for small families and 3 passengers', 
+'Honda', 'City', 'Automatic Transmission', 4, 4, 200, 1, current_timestamp(), 1),
+('Compact', 'Medium sized cars ideal for small families and 4 passengers', 
+'Honda', 'Jazz', 'Automatic Transmission', 5, 5, 200, 1, current_timestamp(), 1),
+('Compact Hybrid', 'Medium sized cars ideal for small families and 4 passengers', 
+'Toyota', 'Corolla Hybrid', 'Automatic Transmission', 4, 5, 200, 1, current_timestamp(), 1),
+('Intermediate', 'Medium sized cars ideal for small families and 3 passengers', 
+'Hyundai', 'Elantra', 'Automatic Transmission', 4, 4, 220, 1, current_timestamp(), 1),
+('Full Size', 'Ideal for larger families and 5 passengers', 
+'Toyota', 'Camry', 'Automatic Transmission', 4, 5, 240, 1, current_timestamp(), 1),
+('Full Size', 'Ideal for larger families and 5 passengers', 
+'Honda', 'Accord', 'Automatic Transmission', 4, 5, 240, 1, current_timestamp(), 1),
+('Full Size', 'Ideal for larger families and 5 passengers', 
+'Ford', 'Focus', 'Automatic Transmission', 5, 5, 240, 1, current_timestamp(), 1),
+('Full Size', 'Ideal for larger families and 5 passengers', 
+'Kia', 'Optima', 'Automatic Transmission', 4, 5, 240, 1, current_timestamp(), 1),
+('Full Size', 'Ideal for larger families and 5 passengers', 
+'Mazda', '6', 'Automatic Transmission', 4, 5, 250, 1, current_timestamp(), 1),
+('Full Size Hybrid', 'Ideal for larger families and 5 passengers', 
+'Toyota', 'Camry Hybrid', 'Automatic Transmission', 4, 5, 250, 1, current_timestamp(), 1)
+;
