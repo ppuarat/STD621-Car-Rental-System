@@ -1,5 +1,7 @@
 INSERT INTO cars (name, detail, brand, model, transmission, door, seat, daily_rate, is_available, created_at, is_active) 
-VALUES('Economy', 'Small economical cars suitable for the city and short trips', 'Toyota', 'Yaris', 'Automatic Transmission', 5, 4, 150, 1, current_timestamp(), 1);
+VALUES
+('Economy', 'Small economical cars suitable for the city and short trips', 'Toyota', 
+'Yaris', 'Automatic Transmission', 5, 4, 150, 1, current_timestamp(), 1),
 ('Compact', 'Medium sized cars ideal for small families and 4 passengers', 
 'Mazda', '3', 'Automatic Transmission', 5, 5, 185, 1, current_timestamp(), 1),
 ('Compact', 'Medium sized cars ideal for small families and 3 passengers', 
