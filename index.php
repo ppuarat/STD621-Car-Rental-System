@@ -4,8 +4,8 @@
 <?php include './views/header.php' ?>
 
 <body>
+    <?php include './views/navbar.php' ?>
     <div class="container">
-        <?php include './views/navbar.php' ?>
         <!-- Content here -->
         <!-- page header -->
         <div class="row ">
@@ -23,25 +23,25 @@
         ?>
         <div class="row row-cols-1 row-cols-md-3 pt-5">
             <?php foreach ($cars as $car) { ?>
-                <div class="col  mb-4">
+                <div class="col mb-4">
                     <div class="card bg-light">
-                        <img src="./views/img/cars/honda-jazz.png" class="card-img-top" alt="...">
+                        <img src="<?=SCRIPT_ROOT?>/views/img/cars/<?= $car->getImage()[0]->getImage_src(); ?>" class="card-img-top" alt="...">
                         <div class="card-header">
-                            <?php echo $car->getName(); ?>
+                            <?= $car->getName(); ?>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title"><?php echo $car->getBrand() . " " . $car->getModel(); ?></h5>
-                            <p class="card-text"><?php echo $car->getDetail(); ?></p>
-                            <p class="card-text"><?php echo $car->getTransmission(); ?></p>
+                            <h5 class="card-title"><?= $car->getBrand() . " " . $car->getModel(); ?></h5>
+                            <p class="card-text"><?= $car->getDetail(); ?></p>
+                            <p class="card-text"><?= $car->getTransmission(); ?></p>
                             <p class="card-text">
-                                <?php echo $car->getSeat(); ?> seats
-                                <?php echo $car->getDoor(); ?> doors
+                                <?= $car->getSeat(); ?> seats
+                                <?= $car->getDoor(); ?> doors
                             </p>
 
                         </div>
                         <div class="card-footer">
-                            <h3 class="inline"> NZD<?php echo $car->getDaily_rate(); ?></h3>
-                            <a href="#" class="btn btn-warning floatRight">BOOK NOW</a>
+                            <h3 class="inline"> NZD<?= $car->getDaily_rate(); ?></h3>
+                            <a onclick="rentModal(<?= json_encode($car); ?>)" class="btn btn-warning floatRight">BOOK NOW</a>
                         </div>
                     </div>
                 </div>
@@ -50,9 +50,9 @@
         </div>
 
         <!-- END-Content -->
-        <?php include './views/footer.php' ?>
     </div>
-
+    <?php include './views/footer.php' ?>
+    <?php include './views/rentModal.php' ?>
 
 </body>
 <script src=""></script>

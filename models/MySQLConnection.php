@@ -2,24 +2,30 @@
 
 class MySQLConnection
 {
-    public function getConnection()
+    private $conn;
+    public function __construct()
     {
-
         $servername = "localhost";
         $username = "crs_app";
         $password = "phpphpphp";
         $db = "std621";
 
         // Create connection
-        $conn = new mysqli($servername, $username, $password, $db);
-        $conn->set_charset("utf8");
+        $this->conn = new mysqli($servername, $username, $password, $db);
+        $this->conn->set_charset("utf8");
 
         // Check connection
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+        if ($this->conn->connect_error) {
+            die("Connection failed: " . $this->conn->connect_error);
         }
+    }
+    public function getConnection()
+    {
+        return $this->conn;
+    }
 
-        return $conn;
+    public function __destruct()
+    {
+        mysqli_close($this->conn);
     }
 }
-?>

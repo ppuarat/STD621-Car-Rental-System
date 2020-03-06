@@ -13,7 +13,7 @@
         private $is_available;
         private $created_at;
         private $is_active;
-        private $images = array();
+        private $image;
 
         public function getId(){
             return $this->id;
@@ -111,11 +111,11 @@
             $this->is_active = $is_active;
         }
 
-        public function setImages($images){
-            $this->images = $images;
+        public function setImage($image){
+            $this->image = $image;
         }
-        public function getImages(){
-            return $this->images;
+        public function getImage(){
+            return $this->image;
         }
     }
 ?>
