@@ -32,3 +32,8 @@
 .floatRight{
     float: right;
 }
+.input-group {
+    position: relative;
+    display: table;
+    border-collapse: separate;
+}

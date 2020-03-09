@@ -20,19 +20,28 @@ class CarsController
         
         $cars = array();
 
-        $result = $this->crudRepo->findAll("cars");
+        $conn = $this->mySQLConnector->getConnection();
+        $sql = "select C.*,ci.image_src  
+        from cars c 
+        inner join car_images ci on c.id = ci.fk_car_id";
+        $cars = array();
+
+        $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_array()) {
                 array_push($cars, $this->mapper($row));
             }
         }
-
+        
         return $cars;
     }
     public function findAvailableCars()
     {
         $conn = $this->mySQLConnector->getConnection();
-        $sql = "Select * from cars where is_available = true and is_active = true;";
+        $sql = "select C.*,ci.image_src  
+        from cars c 
+        inner join car_images ci on c.id = ci.fk_car_id
+        where c.is_active = 1";
         $cars = array();
 
         $result = $conn->query($sql);
@@ -122,7 +131,7 @@ class CarsController
         $car->setIs_available($row['is_available']);
         $car->setIs_active($row['is_active']);
         $car->setCreated_at($row['created_at']);
-        $car->setImage($this->findCarImage($car->getId()));
+        $car->setImage($row['image_src']);
 
         return $car;
     }
