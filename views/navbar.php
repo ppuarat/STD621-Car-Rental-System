@@ -7,8 +7,9 @@ $pages["contact-us.php"] = "Contact us";
 $pages["admin/admin.php"] = "Admin";
 
 $curPageName = substr($_SERVER["SCRIPT_NAME"], strrpos($_SERVER["SCRIPT_NAME"], "/") + 1);
-
 $active = false;
+require(dirname(__DIR__)."\controllers\Utils.php");
+
 ?>
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white border-bottom box-shadow">
   <h5 class="my-0 mr-md-auto font-weight-normal">Rent A Car Co.,Ltd.</h5>
