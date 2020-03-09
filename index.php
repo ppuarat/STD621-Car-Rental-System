@@ -25,7 +25,7 @@
             <?php foreach ($cars as $car) { ?>
                 <div class="col mb-4">
                     <div class="card bg-light">
-                        <img src="<?=SCRIPT_ROOT?>/views/img/cars/<?= $car->getImage()[0]->getImage_src(); ?>" class="card-img-top" alt="...">
+                        <img src="<?=SCRIPT_ROOT?>/views/img/cars/<?= $car->getImage(); ?>" class="card-img-top" alt="...">
                         <div class="card-header">
                             <?= $car->getName(); ?>
                         </div>
@@ -41,7 +41,7 @@
                         </div>
                         <div class="card-footer">
                             <h3 class="inline"> NZD<?= $car->getDaily_rate(); ?></h3>
-                            <a onclick="rentModal(<?= json_encode($car); ?>)" class="btn btn-warning floatRight">BOOK NOW</a>
+                            <a onclick='rentModal(<?= json_encode($car); ?>)' class="btn btn-warning floatRight">BOOK NOW</a>
                         </div>
                     </div>
                 </div>
@@ -51,10 +51,9 @@
 
         <!-- END-Content -->
     </div>
-    <?php include './views/footer.php' ?>
     <?php include './views/rentModal.php' ?>
+    <?php include './views/footer.php' ?>
 
 </body>
-<script src=""></script>
 
 </html>
