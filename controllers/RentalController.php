@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $rental = new RentalController();
 
     if ($_POST['functionName'] == "create") {
-        $rental->create($_POST['rental$rental'], $_POST['fromDate'], $_POST['toDate'], $_POST['total']);
+        $rental->create($_POST['car'], $_POST['fromDate'], $_POST['toDate'], $_POST['total']);
     }
 }
 
@@ -40,7 +40,8 @@ class RentalController
     public function findWaiting()
     {
         $conn = $this->mySQLConnector->getConnection();
-        $sql = "select c.*, u.*, r.*
+        $sql = "select concat('Car ID:',c.id, ' Detail:', c.brand,'-', c.model) as car_detail, 
+        concat(u.first_name,' ', u.last_name,' Email: ', u.email) as customer_detail, r.*
         from rentals r
         inner join cars c on r.fk_car_id = c.id
         inner join users u on r.fk_customer_id = u.id
@@ -50,28 +51,25 @@ class RentalController
         return $result;
     }
 
-    public function create($rental, $fromDate, $toDate, $total)
+    public function create($car, $fromDate, $toDate, $total)
     {
-        // echo $fromDate . " - " . $toDate;
-        // echo $total;
-        // print_r($rental['id']);
         $fromDate = DateTime::createFromFormat('m/d/Y', $fromDate);
         $toDate = DateTime::createFromFormat('m/d/Y', $toDate);
         $fromDate = $fromDate->format('Y-m-d');
         $toDate = $toDate->format('Y-m-d');
 
-        $rentalId = $rental['id'];
+        $carlId = $car['id'];
         //TODO-Get customer id from session
         $customerId = 3;
         //Default Staff ID
         $staffId = 2;
         // return;
         $conn = $this->mySQLConnector->getConnection();
-        $sql = "INSERT INTO rentals (rent_from_date, rent_end_date, fk_rental$rental_id, fk_customer_id, fk_staff_id,
+        $sql = "INSERT INTO rentals (rent_from_date, rent_end_date, fk_car_id, fk_customer_id, fk_staff_id,
         total_price, created_at, is_active) 
         VALUES(?, ?, ?, ?, ?, ?, current_timestamp(), 1);";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssiiid", $fromDate, $toDate, $rentalId, $customerId, $staffId, $total);
+        $stmt->bind_param("ssiiid", $fromDate, $toDate, $carlId, $customerId, $staffId, $total);
         if ($stmt->execute() == true) {
 
             echo "Booking success. Please wait for the confirmation email.";
