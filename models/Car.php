@@ -1,6 +1,6 @@
 <?php
 
-    class Car{
+    class Car implements JsonSerializable{
         private $id;
         private $name;
         private $detail;
@@ -15,6 +15,23 @@
         private $is_active;
         private $image;
 
+        public function jsonSerialize () {
+            return array(
+                'id'=>$this->id,
+                'name'=>$this->name,
+                'detail'=>$this->detail,
+                'brand'=>$this->brand,
+                'model'=>$this->model,
+                'transmission'=>$this->transmission,
+                'door'=>$this->door,
+                'seat'=>$this->seat,
+                'daily_rate'=>$this->daily_rate,
+                'is_available'=>$this->is_available,
+                'created_at'=>$this->created_at,
+                'is_active'=>$this->is_active,
+                'image'=>$this->image
+            );
+        }
         public function getId(){
             return $this->id;
         }
@@ -117,5 +134,6 @@
         public function getImage(){
             return $this->image;
         }
+        
     }
 ?>
