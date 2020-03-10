@@ -45,19 +45,17 @@
                                 <?php while ($row = $requests->fetch_array()) { ?>
                                     <tr>
                                         <td><?= $row['id'] ?></td>
-                                        <td><?= $row['cars.id'] ?></td>
+                                        <td><?= $row['car_detail'] ?></td>
                                         <td><?= $row['rent_from_date'] ?></td>
                                         <td><?= $row['rent_end_date'] ?></td>
-                                        <td><?= $row['fk_customer_id'] ?></td>
+                                        <td><?= $row['customer_detail'] ?></td>
                                         <td><?= $row['total_price'] ?></td>
                                         <td>Waiting</td>
                                         <td>
-                                            <textarea name="description" id="description">
-                                              <?= $row['description'] ?>
-                                            </textarea>
+                                            <textarea name="description" id="descriptionTxt"></textarea>
                                             <br>
-                                            <button type="button" class="btn btn-success btn-sm"> Approve</button>
-                                            <button type="button" class="btn btn-danger btn-sm"> Reject</button>
+                                            <button type="button" onclick="approveRequest(<?= $row['id'] ?>,true);" class="btn btn-success btn-sm"> Approve</button>
+                                            <button type="button" onclick="approveRequest(<?= $row['id'] ?>,false);" class="btn btn-danger btn-sm"> Reject</button>
                                         </td>
                                     </tr>
                             <?php } //end loop
@@ -73,6 +71,5 @@
     <?php include dirname(__DIR__) . '/views/footer.php' ?>
 
 </body>
-<script src=""></script>
 
 </html>

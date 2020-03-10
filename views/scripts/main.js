@@ -11,14 +11,19 @@ function rentModal(car) {
     $("#transmission").html(car.transmission + " " + car.seat + " seats " + car.door + " doors");
     $("#price").html("<strong>Only $" + car.daily_rate + "/day </strong>");
     $("#total").html("");
+    $('#start').val("")
+    $('#end').val("")
+    $('#datepicker').datepicker('clearDates');
     $('#rentModal').modal('toggle');
 
 }
 //datepicker on rent modal
 $('#datepicker').datepicker({
     startDate: '0d',
-    todayBtn: "linked"
+    todayBtn: "linked",
+    autoclose: true
 });
+
 //Recalculate the total price when user select a new date
 function dateChanged() {
     $("#total").html("Rent this car for: " + findDiffDays() + " days. The total cost is " + totalPrice());
@@ -61,18 +66,12 @@ function findDiffDays() {
 }
 //For Request.php
 function approveRequest(rentalId, isApprove) {
-    if(isApprove){
-        console.log("Approved");
-    }else{
-        console.log("Rejected");
-    }
     //Prepare Data
     let data = {
-        functionName: "create",
-        car: CAR,
-        fromDate: $('#start').val(),
-        toDate: $('#end').val(),
-        total: totalPrice()
+        functionName: "approve",
+        rentalId: rentalId,
+        isApprove: isApprove,
+        desc: $("#descriptionTxt").val()
     };
     var settings = {
         "url": "/car-rental-system/controllers/RentalController.php",

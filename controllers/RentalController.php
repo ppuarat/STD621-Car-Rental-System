@@ -9,6 +9,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($_POST['functionName'] == "create") {
         $rental->create($_POST['car'], $_POST['fromDate'], $_POST['toDate'], $_POST['total']);
     }
+    if ($_POST['functionName'] == "approve") {
+        $rental->approve($_POST['rentalId'], $_POST['isApprove'], $_POST['desc']);
+    }
 }
 
 class RentalController
@@ -75,6 +78,25 @@ class RentalController
             echo "Booking success. Please wait for the confirmation email.";
         } else {
             echo "Somthing went wrong!! Please contact our staff.";
+        }
+    }
+
+    public function approve($rentalId, $isApprove, $desc)
+    {
+        $isApprove = ($isApprove ==='true');
+        $status = $isApprove==true? 1:0;
+        $message = $isApprove? "Approved":"Rejected";
+        
+        $conn = $this->mySQLConnector->getConnection();
+        $sql = "UPDATE rentals SET 
+        fk_staff_id=2, is_approve=?, description=?
+        WHERE id=?;";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("isi", $status, $desc, $rentalId);
+        if ($stmt->execute() == true) {
+            echo "This request has been ".$message." successfully.";
+        } else {
+            echo "Somthing went wrong!! Please contact the website administrator.";
         }
     }
 
