@@ -9,17 +9,14 @@
     <div class="container-fluid">
         <div class="row">
             <?php include dirname(__DIR__) . '/admin/adminSideMenu.php' ?>
-
-
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-
                 <h2>Cars</h2>
-
                 <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
+                    <table class="table table-hover">
+                        <thead class="thead-light">
                             <tr>
                                 <th>ID</th>
+                                <th>Image</th>
                                 <th>Class</th>
                                 <th>Brand</th>
                                 <th>Model</th>
@@ -32,15 +29,18 @@
                                 <th>Active</th>
                             </tr>
                         </thead>
-                        <tbody>
-                <?php
-                require_once(dirname(__DIR__) . "/controllers/CarsController.php");
-                $carsController = new CarsController;
-                $cars = $carsController->findAll();
-                ?>
+                        <tbody class="pointer">
+                            <?php
+                            require_once(dirname(__DIR__) . "/controllers/CarsController.php");
+                            $carsController = new CarsController;
+                            $cars = $carsController->findAll();
+                            ?>
                             <?php foreach ($cars as $car) { ?>
-                                <tr>
+                                <tr onclick='editCar(<?= json_encode($car); ?>);'>
                                     <td><?php echo $car->getId(); ?></td>
+                                    <td>
+                                        <img class="car-thumbnail" src="<?= SCRIPT_ROOT . "/views/img/cars/" . $car->getImage(); ?>">
+                                    </td>
                                     <td><?php echo $car->getName(); ?></td>
                                     <td><?php echo $car->getBrand(); ?></td>
                                     <td><?php echo $car->getModel(); ?></td>
