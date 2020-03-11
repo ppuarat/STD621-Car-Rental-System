@@ -87,3 +87,8 @@ function approveRequest(rentalId, isApprove) {
     });
 
 }
+
+function editCar(car){
+    console.log(car);
+    
+}

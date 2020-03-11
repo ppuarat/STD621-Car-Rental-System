@@ -28,16 +28,19 @@ class RentalController
     public function findAll()
     {
 
-        $rentals = array();
+        $conn = $this->mySQLConnector->getConnection();
+        $sql = "select concat('Car ID:',c.id, ' Detail:', c.brand,'-', c.model) as car_detail, 
+        concat(u.first_name,' ', u.last_name,' Email: ', u.email) as customer_detail, r.*
+        from rentals r
+        inner join cars c on r.fk_car_id = c.id
+        inner join users u on r.fk_customer_id = u.id
+        where r.is_approve is not null and r.is_active = true;";
 
-        $result = $this->crudRepo->findAll("rentals");
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_array()) {
-                array_push($rentals, $this->mapper($row));
-            }
-        }
+        $result = $conn->query($sql);
+        return $result;
+       
+        return $result;
 
-        return $rentals;
     }
 
     public function findWaiting()
@@ -86,7 +89,7 @@ class RentalController
         $isApprove = ($isApprove ==='true');
         $status = $isApprove==true? 1:0;
         $message = $isApprove? "Approved":"Rejected";
-        
+
         $conn = $this->mySQLConnector->getConnection();
         $sql = "UPDATE rentals SET 
         fk_staff_id=2, is_approve=?, description=?

@@ -16,8 +16,8 @@
                 <h2>Rental Requests</h2>
 
                 <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
+                    <table class="table table-hover">
+                        <thead class="thead-light">
                             <tr>
                                 <th>ID</th>
                                 <th>Car Detail</th>
@@ -29,7 +29,7 @@
                                 <th>Description</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="pointer">
                             <?php
                             require_once(dirname(__DIR__) . "/controllers/RentalController.php");
                             $rentalController = new RentalController;
