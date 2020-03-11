@@ -37,3 +37,20 @@
     display: table;
     border-collapse: separate;
 }
+.color-inherit{
+    color: inherit !important;
+    text-decoration:none !important;
+}
+
+.color-inherit:hover{
+    color: inherit !important;
+    text-decoration:none !important;
+}
+
+.car-thumbnail{
+    max-width: 200px;
+}
+
+.pointer{
+    cursor: pointer;
+}
