@@ -12,7 +12,7 @@ require(dirname(__DIR__)."\controllers\Utils.php");
 
 ?>
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 bg-white border-bottom box-shadow">
-  <h5 class="my-0 mr-md-auto font-weight-normal">Rent A Car Co.,Ltd.</h5>
+  <h5 class="my-0 mr-md-auto font-weight-normal"><a class="color-inherit" href="<?= SCRIPT_ROOT."/index.php"?>">Rent A Car Co.,Ltd.</a></h5>
   <nav class="my-2 my-md-0 mr-md-3">
     <?php foreach ($pages as $url => $title) { ?>
       <?php $url === $curPageName ? $active = true : $active = false ?>
