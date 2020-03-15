@@ -90,5 +90,9 @@ function approveRequest(rentalId, isApprove) {
 
 function editCar(car){
     console.log(car);
+    $('#carModal').modal('toggle');
+}
+
+function createCar(){
     
 }
