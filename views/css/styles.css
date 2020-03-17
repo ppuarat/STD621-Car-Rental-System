@@ -51,6 +51,10 @@
     max-width: 200px;
 }
 
+.car-thumbnail-modal{
+    max-width: 465px;
+}
+
 .pointer{
     cursor: pointer;
 }

@@ -7,10 +7,20 @@
 <body>
     <?php include dirname(__DIR__) . '/views/navbar.php' ?>
     <div class="container-fluid">
+
         <div class="row">
             <?php include dirname(__DIR__) . '/admin/adminSideMenu.php' ?>
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-                <h2>Cars</h2>
+                <div class="row">
+                    <div class="col-6">
+                        <h2>Cars</h2>
+                    </div>
+                    <div class="col-6">
+                        <button type="button" class="btn btn-primary floatRight" onclick='openCreateCarModal();'>
+                            Create
+                        </button>
+                    </div>
+                </div>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="thead-light">
@@ -36,10 +46,10 @@
                             $cars = $carsController->findAll();
                             ?>
                             <?php foreach ($cars as $car) { ?>
-                                <tr onclick='editCar(<?= json_encode($car); ?>);'>
+                                <tr onclick='openEditCarModal(<?= json_encode($car); ?>);'>
                                     <td><?php echo $car->getId(); ?></td>
                                     <td>
-                                        <img class="car-thumbnail" src="<?= SCRIPT_ROOT . "/views/img/cars/" . $car->getImage(); ?>">
+                                        <img class="car-thumbnail" src="<?= $car->getImage(); ?>">
                                     </td>
                                     <td><?php echo $car->getName(); ?></td>
                                     <td><?php echo $car->getBrand(); ?></td>
@@ -63,6 +73,7 @@
     <?php include dirname(__DIR__) . '/views/footer.php' ?>
 
 </body>
-<script src=""></script>
+<?php include dirname(__DIR__) . '/admin/editCarModal.php' ?>
+<?php include dirname(__DIR__) . '/admin/createCarModal.php' ?>
 
 </html>

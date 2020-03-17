@@ -54,8 +54,12 @@
                                         <td>
                                             <textarea name="description" id="descriptionTxt"></textarea>
                                             <br>
-                                            <button type="button" onclick="approveRequest(<?= $row['id'] ?>,true);" class="btn btn-success btn-sm"> Approve</button>
-                                            <button type="button" onclick="approveRequest(<?= $row['id'] ?>,false);" class="btn btn-danger btn-sm"> Reject</button>
+                                            <button type="button" onclick="approveRequest(<?= $row['id'] ?>,true);" class="btn btn-success btn-sm">
+                                                Approve
+                                            </button>
+                                            <button type="button" onclick="approveRequest(<?= $row['id'] ?>,false);" class="btn btn-danger btn-sm">
+                                                Reject
+                                            </button>
                                         </td>
                                     </tr>
                             <?php } //end loop

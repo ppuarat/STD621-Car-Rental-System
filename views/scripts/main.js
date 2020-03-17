@@ -17,12 +17,7 @@ function rentModal(car) {
     $('#rentModal').modal('toggle');
 
 }
-//datepicker on rent modal
-$('#datepicker').datepicker({
-    startDate: '0d',
-    todayBtn: "linked",
-    autoclose: true
-});
+
 
 //Recalculate the total price when user select a new date
 function dateChanged() {
@@ -53,17 +48,6 @@ function submitRent() {
     });
 }
 
-function totalPrice() {
-    return findDiffDays() * $("#rate").val();
-}
-
-function findDiffDays() {
-    let startDate = new Date($('#start').val());
-    let endDate = new Date($('#end').val());
-    let diffTime = Math.abs(endDate - startDate);
-    let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
-    return diffDays;
-}
 //For Request.php
 function approveRequest(rentalId, isApprove) {
     //Prepare Data
@@ -88,7 +72,112 @@ function approveRequest(rentalId, isApprove) {
 
 }
 
-function editCar(car){
+function openEditCarModal(car) {
     console.log(car);
-    
+
+    if (!jQuery.isEmptyObject(car)) {
+        $("#carModalTitle").text("Edit. Car ID:" + car.id);
+
+        $("#carId").val(car.id);
+        $("#imageUrlInput").val(car.image);
+        $("#modalCarImg").attr("src", car.image);
+        $("#classInput").val(car.name);
+        $("#brandInput").val(car.brand);
+        $("#modelInput").val(car.model);
+        $("#detailInput").val(car.detail);
+        $("input[name='transmission'][value='" + car.transmission + "']").prop('checked', true);
+        $("#doorSelect").val(car.door);
+        $("#seatSelect").val(car.seat);
+        $("#rateInput").val(car.daily_rate);
+
+        if (car.is_active) {
+            $("#deactivateCarBtn").show();
+            $("#activateCarBtn").hide();
+
+        } else {
+            $("#activateCarBtn").show();
+            $("#deactivateCarBtn").hide();
+
+        }
+
+        $('#carModal').modal('toggle');
+    }
 }
+
+function openCreateCarModal() {
+    $('#createCarModal').modal('toggle');
+}
+
+function createCar() {
+    let data = {
+        functionName: "create",
+        imageUrl: $("#createImageUrlInput").val(),
+        class: $("#createClassInput").val(),
+        brand: $("#createBrandInput").val(),
+        model: $("#createModelInput").val(),
+        detail: $("#createDetailInput").val(),
+        transmission: $("input[name='createTransmission']:checked").val(),
+        door: $('#createDoorSelect').find(":selected").text(),
+        seat: $('#createSeatSelect').find(":selected").text(),
+        rate: $("#createRateInput").val()
+    };
+    var settings = {
+        "url": "/car-rental-system/controllers/CarsController.php",
+        "method": "POST",
+        "timeout": 0,
+        "data": data
+    };
+    console.log(data);
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        alert(response);
+        location.reload();
+    });
+}
+
+function updateCar() {
+    //Prepare Data
+    let data = {
+        functionName: "update",
+        carId: $("#carId").val(),
+        imageUrl: $("#imageUrlInput").val(),
+        class: $("#classInput").val(),
+        brand: $("#brandInput").val(),
+        model: $("#modelInput").val(),
+        detail: $("#detailInput").val(),
+        transmission: $("input[name='transmission']:checked").val(),
+        door: $('#doorSelect').find(":selected").text(),
+        seat: $('#seatSelect').find(":selected").text(),
+        rate: $("#rateInput").val()
+    };
+    var settings = {
+        "url": "/car-rental-system/controllers/CarsController.php",
+        "method": "POST",
+        "timeout": 0,
+        "data": data
+    };
+    console.log(data);
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        alert(response);
+        location.reload();
+    });
+}
+
+$(document).ready(function () {
+
+    $('#carModal').on('hidden.bs.modal', function (e) {
+        // do something...
+        $("#updateCarBtn").show();
+        $("#deactivateCarBtn").show();
+        $("#activateCarBtn").show();
+        $("#createCarBtn").show();
+    });
+
+    //datepicker on rent modal
+    $('#datepicker').datepicker({
+        startDate: '0d',
+        todayBtn: "linked",
+        autoclose: true
+    });
+});

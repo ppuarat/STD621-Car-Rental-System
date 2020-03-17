@@ -3,3 +3,4 @@
 </footer>
 
 <script src="<?=SCRIPT_ROOT?>/views/scripts/main.js"></script>
+<script src="<?=SCRIPT_ROOT?>/views/scripts/utils.js"></script>
