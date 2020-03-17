@@ -9,8 +9,7 @@
                 </button>
             </div>
             <form action="return false;">
-                <input type="hidden" id="carId" name="carId" value="">
-                <input type="hidden" id="rate" name="rate" value="">
+                <input type="hidden" id="carId" name="carId">
 
                 <div class="modal-body">
                     <div class="row">
@@ -22,7 +21,7 @@
                         <div class="col">
                         <div class="form-group">
                                 <p for="imageUrlInput">Image URL</p>
-                                <input type="text" class="form-control" id="imageUrlInput" placeholder="Please enter an image URL">
+                                <input type="text" class="form-control"  id="imageUrlInput" placeholder="Please enter an image URL">
                             </div>
 
                         </div>

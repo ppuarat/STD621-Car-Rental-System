@@ -46,7 +46,7 @@
                             $cars = $carsController->findAll();
                             ?>
                             <?php foreach ($cars as $car) { ?>
-                                <tr onclick='openCarModal(<?= json_encode($car); ?>,"edit");'>
+                                <tr onclick='openEditCarModal(<?= json_encode($car); ?>);'>
                                     <td><?php echo $car->getId(); ?></td>
                                     <td>
                                         <img class="car-thumbnail" src="<?= $car->getImage(); ?>">

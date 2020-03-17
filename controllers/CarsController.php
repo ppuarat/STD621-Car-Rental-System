@@ -1,9 +1,21 @@
 <?php
 
-require_once(dirname(__DIR__)."/models/MySQLConnection.php");
-require_once(dirname(__DIR__)."/controllers/CrudRepository.php");
-require_once(dirname(__DIR__)."/models/Car.php");
-require_once(dirname(__DIR__)."/models/CarImage.php");
+require_once(dirname(__DIR__) . "/models/MySQLConnection.php");
+require_once(dirname(__DIR__) . "/controllers/CrudRepository.php");
+require_once(dirname(__DIR__) . "/models/Car.php");
+require_once(dirname(__DIR__) . "/models/CarImage.php");
+
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $carsController = new CarsController();
+
+    if ($_POST['functionName'] == "create") {
+        $carsController->create();
+    }
+    if ($_POST['functionName'] == "update") {
+        $carsController->update();
+    }
+}
 class CarsController
 {
     private $mySQLConnector;
@@ -13,11 +25,11 @@ class CarsController
     {
         $this->mySQLConnector = new MySQLConnection;
         $this->crudRepo = new CrudRepository;
-
     }
 
-    public function findAll(){
-        
+    public function findAll()
+    {
+
         $cars = array();
 
         $conn = $this->mySQLConnector->getConnection();
@@ -31,7 +43,7 @@ class CarsController
                 array_push($cars, $this->mapper($row));
             }
         }
-        
+
         return $cars;
     }
     public function findAvailableCars()
@@ -48,19 +60,19 @@ class CarsController
                 array_push($cars, $this->mapper($row));
             }
         } else {
-            
         }
-        
+
         return $cars;
     }
 
-    public function findCarImage($carId){
+    public function findCarImage($carId)
+    {
         $conn = $this->mySQLConnector->getConnection();
         $sql = "Select * from car_images where fk_car_id=?;";
         $carImages = array();
 
-        if($stmt = $conn->prepare($sql)){
-            $stmt->bind_param("i",$carId);
+        if ($stmt = $conn->prepare($sql)) {
+            $stmt->bind_param("i", $carId);
             $stmt->execute();
             $result = $stmt->get_result();
             if ($result->num_rows > 0) {
@@ -72,46 +84,90 @@ class CarsController
         return $carImages;
     }
 
-    public function create(){
+    public function create()
+    {
+        $imageUrl = $_POST['imageUrl'];
+        $class = $_POST['class'];
+        $brand = $_POST['brand'];
+        $model = $_POST['model'];
+        $detail = $_POST['detail'];
+        $transmission = $_POST['transmission'];
+        $door = $_POST['door'];
+        $seat = $_POST['seat'];
+        $rate = $_POST['rate'];
+
         $conn = $this->mySQLConnector->getConnection();
         $sql = "INSERT INTO cars (name, detail, brand, model, transmission, "
-        ."door, seat, daily_rate, is_available, created_at, is_active)"
-        ."VALUES(?, ?, ?, ?, ?, ?, ?, ?, 1, current_timestamp(), 1);";
+            . "door, seat, daily_rate, image,is_available, created_at, is_active)"
+            . "VALUES(?, ?, ?, ?, ?, ?, ?, ?,?, 1, current_timestamp(), 1);";
 
         try {
-            if($stmt = $conn->prepare($sql)){
-                $stmt->bind_param("sssssiid","");
+            if ($stmt = $conn->prepare($sql)) {
+                $stmt->bind_param(
+                    "sssssiids",
+                    $class,
+                    $detail,
+                    $brand,
+                    $model,
+                    $transmission,
+                    $door,
+                    $seat,
+                    $rate,
+                    $imageUrl
+                );
                 $stmt->execute();
-                echo "Success!";
+                echo "Your new car is ready!";
             }
         } catch (Exception  $e) {
             echo $e->getMessage();
         }
     }
 
-    public function update($id){
+    public function update()
+    {
 
-        
+        $id = $_POST['carId'];
+        $imageUrl = $_POST['imageUrl'];
+        $class = $_POST['class'];
+        $brand = $_POST['brand'];
+        $model = $_POST['model'];
+        $detail = $_POST['detail'];
+        $transmission = $_POST['transmission'];
+        $door = $_POST['door'];
+        $seat = $_POST['seat'];
+        $rate = $_POST['rate'];
+
         $conn = $this->mySQLConnector->getConnection();
         $sql = "UPDATE cars SET name=?, detail=?, brand=?, model=?, "
-        ."transmission=?, door=?, seat=?, daily_rate=?, "
-        ." WHERE id=?;";
-
+            . "transmission=?, door=?, seat=?, daily_rate=?, image=?"
+            . " WHERE id=?;";
         try {
-            if($stmt = $conn->prepare($sql)){
-                $stmt->bind_param("sssssiidi","");
+            if ($stmt = $conn->prepare($sql)) {
+                $stmt->bind_param(
+                    "sssssiidsi",
+                    $class,
+                    $detail,
+                    $brand,
+                    $model,
+                    $transmission,
+                    $door,
+                    $seat,
+                    $rate,
+                    $imageUrl,
+                    $id
+                );
                 $stmt->execute();
-                echo "Success!";
+                echo "Update Success!";
             }
         } catch (Exception  $e) {
             echo $e->getMessage();
         }
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
 
-        return $this->crudRepo->toggle("cars",$id);
-      
+        return $this->crudRepo->toggle("cars", $id);
     }
 
     public function mapper($row)
@@ -134,7 +190,8 @@ class CarsController
         return $car;
     }
 
-    public function imagesMapper($row){
+    public function imagesMapper($row)
+    {
         $image = new CarImage();
         $image->setId($row['id']);
         $image->setCaption($row['caption']);

@@ -72,11 +72,13 @@ function approveRequest(rentalId, isApprove) {
 
 }
 
-function openCarModal(car, mode) {
+function openEditCarModal(car) {
     console.log(car);
 
     if (!jQuery.isEmptyObject(car)) {
         $("#carModalTitle").text("Edit. Car ID:" + car.id);
+
+        $("#carId").val(car.id);
         $("#imageUrlInput").val(car.image);
         $("#modalCarImg").attr("src", car.image);
         $("#classInput").val(car.name);
@@ -107,7 +109,59 @@ function openCreateCarModal() {
 }
 
 function createCar() {
+    let data = {
+        functionName: "create",
+        imageUrl: $("#createImageUrlInput").val(),
+        class: $("#createClassInput").val(),
+        brand: $("#createBrandInput").val(),
+        model: $("#createModelInput").val(),
+        detail: $("#createDetailInput").val(),
+        transmission: $("input[name='createTransmission']:checked").val(),
+        door: $('#createDoorSelect').find(":selected").text(),
+        seat: $('#createSeatSelect').find(":selected").text(),
+        rate: $("#createRateInput").val()
+    };
+    var settings = {
+        "url": "/car-rental-system/controllers/CarsController.php",
+        "method": "POST",
+        "timeout": 0,
+        "data": data
+    };
+    console.log(data);
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        alert(response);
+        location.reload();
+    });
+}
 
+function updateCar() {
+    //Prepare Data
+    let data = {
+        functionName: "update",
+        carId: $("#carId").val(),
+        imageUrl: $("#imageUrlInput").val(),
+        class: $("#classInput").val(),
+        brand: $("#brandInput").val(),
+        model: $("#modelInput").val(),
+        detail: $("#detailInput").val(),
+        transmission: $("input[name='transmission']:checked").val(),
+        door: $('#doorSelect').find(":selected").text(),
+        seat: $('#seatSelect').find(":selected").text(),
+        rate: $("#rateInput").val()
+    };
+    var settings = {
+        "url": "/car-rental-system/controllers/CarsController.php",
+        "method": "POST",
+        "timeout": 0,
+        "data": data
+    };
+    console.log(data);
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        alert(response);
+        location.reload();
+    });
 }
 
 $(document).ready(function () {

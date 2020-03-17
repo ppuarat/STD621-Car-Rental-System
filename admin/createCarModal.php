@@ -17,7 +17,7 @@
                     </div>
                     <div class="row">
                         <div class="col">
-                        <div class="form-group">
+                            <div class="form-group">
                                 <p for="imageUrlInput">Image URL</p>
                                 <input type="text" class="form-control" id="createImageUrlInput" placeholder="Please enter an image URL">
                             </div>
@@ -28,7 +28,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <p for="classInput">Class</p>
-                                <input type="text" class="form-control" id="createClassInput" >
+                                <input type="text" class="form-control" id="createClassInput">
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="modelInput">Model</label>
-                                <input type="text" class="form-control" id="createModelInput" >
+                                <input type="text" class="form-control" id="createModelInput">
                             </div>
                         </div>
                     </div>
@@ -61,13 +61,13 @@
                             <div class="form-group">
                                 <label for="transmission">Transmission</label>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input class="custom-control-input" type="radio" name="transmission" id="createAutomatic" value="Automatic Transmission" checked>
+                                    <input class="custom-control-input" type="radio" name="createTransmission" id="createAutomatic" value="Automatic Transmission" checked>
                                     <label class="custom-control-label" for="automatic">
                                         Automatic
                                     </label>
                                 </div>
                                 <div class="custom-control custom-radio custom-control-inline">
-                                    <input class="custom-control-input" type="radio" name="transmission" id="createManual" value="Manual Transmission">
+                                    <input class="custom-control-input" type="radio" name="createTransmission" id="createManual" value="Manual Transmission">
                                     <label class="custom-control-label" for="manual">
                                         Manual
                                     </label>
