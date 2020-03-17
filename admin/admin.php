@@ -16,7 +16,9 @@
                         <h2>Cars</h2>
                     </div>
                     <div class="col-6">
-                        <button type="button" class="btn btn-primary floatRight">Create</button>
+                        <button type="button" class="btn btn-primary floatRight" onclick='openCreateCarModal();'>
+                            Create
+                        </button>
                     </div>
                 </div>
                 <div class="table-responsive">
@@ -44,10 +46,10 @@
                             $cars = $carsController->findAll();
                             ?>
                             <?php foreach ($cars as $car) { ?>
-                                <tr onclick='editCar(<?= json_encode($car); ?>);'>
+                                <tr onclick='openCarModal(<?= json_encode($car); ?>,"edit");'>
                                     <td><?php echo $car->getId(); ?></td>
                                     <td>
-                                        <img class="car-thumbnail" src="<?= SCRIPT_ROOT . "/views/img/cars/" . $car->getImage(); ?>">
+                                        <img class="car-thumbnail" src="<?= $car->getImage(); ?>">
                                     </td>
                                     <td><?php echo $car->getName(); ?></td>
                                     <td><?php echo $car->getBrand(); ?></td>
@@ -71,6 +73,7 @@
     <?php include dirname(__DIR__) . '/views/footer.php' ?>
 
 </body>
-<?php include dirname(__DIR__) . '/admin/carModal.php' ?>
+<?php include dirname(__DIR__) . '/admin/editCarModal.php' ?>
+<?php include dirname(__DIR__) . '/admin/createCarModal.php' ?>
 
 </html>

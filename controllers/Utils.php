@@ -1,6 +1,5 @@
 <?php 
-    function activePage(){
+    class Utils{
 
-        
     }
 ?>

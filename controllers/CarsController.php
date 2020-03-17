@@ -21,9 +21,8 @@ class CarsController
         $cars = array();
 
         $conn = $this->mySQLConnector->getConnection();
-        $sql = "select C.*,ci.image_src  
-        from cars c 
-        inner join car_images ci on c.id = ci.fk_car_id";
+        $sql = "select c.*
+        from cars c;";
         $cars = array();
 
         $result = $conn->query($sql);
@@ -38,10 +37,9 @@ class CarsController
     public function findAvailableCars()
     {
         $conn = $this->mySQLConnector->getConnection();
-        $sql = "select C.*,ci.image_src  
+        $sql = "select c.*  
         from cars c 
-        inner join car_images ci on c.id = ci.fk_car_id
-        where c.is_active = 1";
+        where c.is_active = 1;";
         $cars = array();
 
         $result = $conn->query($sql);
@@ -131,7 +129,7 @@ class CarsController
         $car->setIs_available($row['is_available']);
         $car->setIs_active($row['is_active']);
         $car->setCreated_at($row['created_at']);
-        $car->setImage($row['image_src']);
+        $car->setImage($row['image']);
 
         return $car;
     }

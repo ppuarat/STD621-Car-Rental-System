@@ -25,7 +25,7 @@
             <?php foreach ($cars as $car) { ?>
                 <div class="col mb-4">
                     <div class="card bg-light">
-                        <img src="<?=SCRIPT_ROOT?>/views/img/cars/<?= $car->getImage(); ?>" class="card-img-top" alt="...">
+                        <img src="<?= $car->getImage(); ?>" class="card-img-top" alt="...">
                         <div class="card-header">
                             <?= $car->getName(); ?>
                         </div>

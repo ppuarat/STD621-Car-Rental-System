@@ -34,7 +34,8 @@ class RentalController
         from rentals r
         inner join cars c on r.fk_car_id = c.id
         inner join users u on r.fk_customer_id = u.id
-        where r.is_approve is not null and r.is_active = true;";
+        where r.is_approve is not null and r.is_active = true 
+        order by r.id desc;";
 
         $result = $conn->query($sql);
         return $result;
