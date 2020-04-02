@@ -42,7 +42,7 @@ session_start();
                print_r($_SESSION); //prints all session variables
 
                //redirect to customer's home page after seting session variables
-               header("location: customer_home.php");
+               header("location: index.php");
                exit;
            }
 
