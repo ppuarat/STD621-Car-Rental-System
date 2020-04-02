@@ -1,4 +1,3 @@
-
 <?php
 	include 'models/MySQLConnection.php';
     $conn_obj = new MySQLConnection;
