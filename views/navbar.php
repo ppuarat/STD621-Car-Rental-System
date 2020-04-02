@@ -20,7 +20,7 @@ require(dirname(__DIR__)."\controllers\Utils.php");
 
     <?php } ?>
   </nav>
-  <a class="btn btn-outline-primary" href="#">Sign in</a>
+  <a class="btn btn-outline-primary" href="login.php">Sign in</a>
   &nbsp;
-  <a class="btn btn-outline-primary" href="#">Sign up</a>
+  <a class="btn btn-outline-primary" href="signup.php">Sign up</a>
 </div>
