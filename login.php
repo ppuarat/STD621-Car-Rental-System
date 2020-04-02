@@ -2,43 +2,58 @@
 
 session_start();
 
-}
 
 	include 'models/MySQLConnection.php';
 	include 'models/User.php';
-    include 'controllers/UserController.php';
+
 
     $conn_obj = new MySQLConnection;
     $conn = $conn_obj->getConnection();
 
-    $email = "";
     $password = "";
+    $email = "";
 
 
-    //Extract or grab the data from the form
+   //Extract or grab the data from the form
     // and store those values in these two variables
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $userDao = new UserDao();
-    // username and password sent from form
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $email = $userController->find($email);
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+		//Grab the form variables stored in the POST global variable i.e. the POST Request object
+		$password = $_POST['password'];
+        $email = $_POST['email'];
+        $table_name = 'users';
 
-    // If user with such username does not exist or
-    // has different password
-    if (!$user || $user->getPassword() !== $password) {
-        $error = "Invalid credentials";
-    } else {
-        $_SESSION['user'] = serialize($user);
-        if ($user->getFk_role_id() == 1) {
-            header("location: admin.php");
-            exit;
-        } else {
-            header("location: index.php");
-            exit;
+        //write code here which adds them as a new record to my database
+        $sql_stmt = "SELECT * FROM " . $table_name . " WHERE
+         email = '" . $email . "' AND password = '" . $password . "' Limit 1";
+
+        //echo $sql_stmt; //Check if my statement is correct as per sql syntax
+        $result = $conn->query($sql_stmt);
+
+        if ($result->num_rows > 0) {
+            // get the first record from the results array
+           if($row = $result->fetch_array()){
+               //echo "user first name: " . $row['first_name'];
+               // store the database values of this record into session
+               $_SESSION['first_name'] = $row['first_name'];
+               $_SESSION['last_name'] = $row['last_name'];
+               $_SESSION['email'] = $row['email'];
+               $_SESSION['id'] = $row['id'];
+
+               print_r($_SESSION); //prints all session variables
+
+               //redirect to customer's home page after seting session variables
+               header("location: customer_home.php");
+               exit;
+           }
+
         }
+        else {
+            echo "Sorry, your email or password maybe incorrect";
+        }
+
+        $conn->close();
+
     }
-}
 ?>
 
 <!DOCTYPE html>
