@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html>
-
 <?php include './views/header.php' ?>
-
 <body>
     <?php include './views/navbar.php' ?>
     <div class="container">
@@ -37,7 +35,6 @@
                                 <?= $car->getSeat(); ?> seats
                                 <?= $car->getDoor(); ?> doors
                             </p>
-
                         </div>
                         <div class="card-footer">
                             <h3 class="inline"> NZD<?= $car->getDaily_rate(); ?></h3>
@@ -46,14 +43,10 @@
                     </div>
                 </div>
             <?php }; ?>
-
         </div>
-
         <!-- END-Content -->
     </div>
     <?php include './views/rentModal.php' ?>
     <?php include './views/footer.php' ?>
-
 </body>
-
 </html>

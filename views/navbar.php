@@ -1,7 +1,6 @@
 <?php
 $pages = array();
 $pages["index.php"] = "Home";
-$pages["cars.php"] = "Cars";
 $pages["about-us.php"] = "About us";
 $pages["contact-us.php"] = "Contact us";
 $pages["admin/admin.php"] = "Admin";

@@ -126,10 +126,10 @@
                     <button type="button" id="updateCarBtn" class="btn btn-info" onclick="updateCar();">
                         Update
                     </button>
-                    <button type="button" id="deactivateCarBtn" class="btn btn-warning" onclick="activateCar(false);">
+                    <button type="button" id="deactivateCarBtn" class="btn btn-warning" onclick="activateCar();">
                         Deactivate
                     </button>
-                    <button type="button" id="activateCarBtn" class="btn btn-warning" onclick="activateCar(true);">
+                    <button type="button" id="activateCarBtn" class="btn btn-warning" onclick="activateCar();">
                         Activate
                     </button>
                 </div>

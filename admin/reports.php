@@ -11,51 +11,54 @@
             <?php include dirname(__DIR__) . '/admin/adminSideMenu.php' ?>
 
 
+
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
 
-                <h2>Cars</h2>
 
-                <div class="table-responsive">
-                    <table class="table table-striped table-sm">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Class</th>
-                                <th>Brand</th>
-                                <th>Model</th>
-                                <th>Detail</th>
-                                <th>Transmission</th>
-                                <th>Door</th>
-                                <th>Seat</th>
-                                <th>Daily Rate</th>
-                                <th>Available</th>
-                                <th>Active</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                <?php
-                require_once(dirname(__DIR__) . "/controllers/CarsController.php");
-                $carsController = new CarsController;
-                $cars = $carsController->findAll();
-                ?>
-                            <?php foreach ($cars as $car) { ?>
-                                <tr>
-                                    <td><?php echo $car->getId(); ?></td>
-                                    <td><?php echo $car->getName(); ?></td>
-                                    <td><?php echo $car->getBrand(); ?></td>
-                                    <td><?php echo $car->getModel(); ?></td>
-                                    <td><?php echo $car->getDetail(); ?></td>
-                                    <td><?php echo $car->getTransmission(); ?></td>
-                                    <td><?php echo $car->getDoor(); ?></td>
-                                    <td><?php echo $car->getSeat(); ?></td>
-                                    <td><?php echo $car->getDaily_rate(); ?></td>
-                                    <td><?php echo $car->getIs_available() ? "True" : "False"; ?></td>
-                                    <td><?php echo $car->getIs_active() ? "True" : "False"; ?></td>
-                                </tr>
-                            <?php } ?>
-                        </tbody>
-                    </table>
+                <div class="row pb-3">
+                    <div class="col-12">
+                        <h2>Reports</h2>
+                        <hr/>
+                    </div>
                 </div>
+                <div class="row ">
+                    <div class="col-12">
+                        <h5>Most Rented Cars</h5>
+                    </div>
+                </div>
+                <div class="row py-3">
+                    <div class="col-12">
+                        <div id="mostRentedCars" style="width:100%;height:100%;"></div>
+                    </div>
+                </div>
+
+                <div class="row ">
+                    <div class="col-12">
+                        <h5>Available Cars</h5>
+                    </div>
+                </div>
+                <div class="row py-3">
+                    <div class="col-12">
+                        <div id="availableCars" style="width:100%;height:100%;"></div>
+                    </div>
+                </div>
+
+                <div class="row ">
+                    <div class="col-12">
+                        <h5>Performance</h5>
+                    </div>
+                </div>
+                <div class="row py-3">
+                    <div class="col-12">
+                        <div id="performance" style="width:100%;height:100%;"></div>
+                    </div>
+                </div>
+                <div class="row py-3">
+                    <div class="col-12">
+                        <div id="performance2" style="width:100%;height:100%;"></div>
+                    </div>
+                </div>
+
             </main>
         </div>
         <!-- END-Content -->
@@ -63,6 +66,20 @@
     <?php include dirname(__DIR__) . '/views/footer.php' ?>
 
 </body>
-<script src=""></script>
+
+<script>
+    <?php
+    require_once(dirname(__DIR__) . "/controllers/ReportController.php");
+    $reportCon = new ReportController();
+    $mostRentedCarsReport = $reportCon->findMostRentedCars();
+    $availableCarsReport = $reportCon->findAvailableCar();
+    $rentPerformanceReport = $reportCon->findRentalPerformance();
+    ?>
+
+    var mostRentedCars = <?= json_encode($mostRentedCarsReport) ?>;
+    var availableCars = <?= json_encode($availableCarsReport) ?>;
+    var rentPerformance = <?= json_encode($rentPerformanceReport) ?>;
+</script>
+<script src="<?= SCRIPT_ROOT ?>/admin/report.js"></script>
 
 </html>

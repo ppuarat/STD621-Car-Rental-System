@@ -6,12 +6,10 @@
 		left: 48.7%;
 		z-index: 1;
 	}
-
 	.videoLink img {
 		height: 47px;
 	}
 </style>
-
 <?php
 require_once("models/MySQLConnection.php");
 if (isset($_POST["btnsubmit"])) {
@@ -21,13 +19,10 @@ if (isset($_POST["btnsubmit"])) {
 	if ($conn->query($sql) === TRUE) {
 		echo "<script>alert('Thanks for the Feed Back');</script>";
 	}
-}	
+}
 ?>
-
 <?php include './views/header.php' ?>
-
 <?php include './views/navbar.php' ?>
-
 <div class="container">
 	<h2>Send Your Feed Back </h2>
 	<div class="row">
@@ -51,7 +46,6 @@ if (isset($_POST["btnsubmit"])) {
 			</ul>
 		</div>
 		<div class="col-md-6">
-
 			<form action="contact-us.php" method="POST" required="">
 				<div class="form-group">
 					<label for="text">Subject :</label>
@@ -60,22 +54,16 @@ if (isset($_POST["btnsubmit"])) {
 				<div class="form-group">
 					<label for="pwd">FeedBack Message :</label>
 					<textarea class="form-control" rows="10" id="feedback" name="txtFeedBack" required="" placeholder="Enter Feed Back "></textarea>
-
 				</div>
 				<input type="submit" class="btn btn-primary" value="Submit" name="btnsubmit" />
 			</form>
-
 		</div>
-
-
 	</div>
 </div>
 <div class="container-fluid">
 	<div class="row">
 		<div class="col-md-12">
-
 			<a href="https://youtu.be/J3mibEf9trU" class="videoLink"><img src="views/img/mark.jpg" /> </a>
-
 			<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d102063.6763921414!2d174.6679383!3d-36.9264592!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x25e5947367274519!2sAce%20Rental%20Cars%20Auckland%20Airport!5e0!3m2!1sen!2sin!4v1583838896701!5m2!1sen!2sin" frameborder="0" style="border:0;width:100%;height:400px;" allowfullscreen="">
 			</iframe>
 		</div>

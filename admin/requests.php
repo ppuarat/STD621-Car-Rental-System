@@ -9,12 +9,8 @@
     <div class="container-fluid">
         <div class="row">
             <?php include dirname(__DIR__) . '/admin/adminSideMenu.php' ?>
-
-
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
-
                 <h2>Rental Requests</h2>
-
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <thead class="thead-light">

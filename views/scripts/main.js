@@ -27,7 +27,7 @@ function dateChanged() {
 function submitRent() {
     //Prepare Data
     let data = {
-        functionName: "create",
+        functionName: "createRent",
         car: CAR,
         fromDate: $('#start').val(),
         toDate: $('#end').val(),
@@ -44,7 +44,7 @@ function submitRent() {
         console.log(response);
         alert(response);
         $('#rentModal').modal('hide');
-
+        location.reload();
     });
 }
 
@@ -52,7 +52,7 @@ function submitRent() {
 function approveRequest(rentalId, isApprove) {
     //Prepare Data
     let data = {
-        functionName: "approve",
+        functionName: "approveRent",
         rentalId: rentalId,
         isApprove: isApprove,
         desc: $("#descriptionTxt").val()
@@ -90,14 +90,13 @@ function openEditCarModal(car) {
         $("#seatSelect").val(car.seat);
         $("#rateInput").val(car.daily_rate);
 
-        if (car.is_active) {
+        if (car.is_active === "1") {
             $("#deactivateCarBtn").show();
             $("#activateCarBtn").hide();
 
         } else {
             $("#activateCarBtn").show();
             $("#deactivateCarBtn").hide();
-
         }
 
         $('#carModal').modal('toggle');
@@ -110,7 +109,7 @@ function openCreateCarModal() {
 
 function createCar() {
     let data = {
-        functionName: "create",
+        functionName: "createCar",
         imageUrl: $("#createImageUrlInput").val(),
         class: $("#createClassInput").val(),
         brand: $("#createBrandInput").val(),
@@ -138,7 +137,7 @@ function createCar() {
 function updateCar() {
     //Prepare Data
     let data = {
-        functionName: "update",
+        functionName: "updateCar",
         carId: $("#carId").val(),
         imageUrl: $("#imageUrlInput").val(),
         class: $("#classInput").val(),
@@ -151,6 +150,26 @@ function updateCar() {
         rate: $("#rateInput").val()
     };
     var settings = {
+        "url": "/car-rental-system/controllers/CarsController.php",
+        "method": "POST",
+        "timeout": 0,
+        "data": data
+    };
+    console.log(data);
+    $.ajax(settings).done(function (response) {
+        console.log(response);
+        alert(response);
+        location.reload();
+    });
+}
+
+function activateCar(){
+    //Prepare Data
+    let data = {
+        functionName: "deleteCar",
+        carId: $("#carId").val()
+    };
+    var settings = {    
         "url": "/car-rental-system/controllers/CarsController.php",
         "method": "POST",
         "timeout": 0,
