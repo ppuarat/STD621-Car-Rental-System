@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html>
-
 <?php include dirname(__DIR__) . '/views/header.php' ?>
 <link href="./css/dashboard.css" rel="stylesheet">
-
 <body>
     <?php include dirname(__DIR__) . '/views/navbar.php' ?>
     <div class="container-fluid">
-
         <div class="row">
             <?php include dirname(__DIR__) . '/admin/adminSideMenu.php' ?>
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
@@ -35,7 +32,6 @@
                                 <th>Door</th>
                                 <th>Seat</th>
                                 <th>Daily Rate</th>
-                                <th>Available</th>
                                 <th>Active</th>
                             </tr>
                         </thead>
@@ -59,7 +55,6 @@
                                     <td><?php echo $car->getDoor(); ?></td>
                                     <td><?php echo $car->getSeat(); ?></td>
                                     <td><?php echo $car->getDaily_rate(); ?></td>
-                                    <td><?php echo $car->getIs_available() ? "True" : "False"; ?></td>
                                     <td><?php echo $car->getIs_active() ? "True" : "False"; ?></td>
                                 </tr>
                             <?php } ?>
@@ -71,7 +66,6 @@
         <!-- END-Content -->
     </div>
     <?php include dirname(__DIR__) . '/views/footer.php' ?>
-
 </body>
 <?php include dirname(__DIR__) . '/admin/editCarModal.php' ?>
 <?php include dirname(__DIR__) . '/admin/createCarModal.php' ?>

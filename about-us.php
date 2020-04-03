@@ -1,8 +1,5 @@
 <?php include './views/header.php' ?>
-
 <?php include './views/navbar.php' ?>
-
-
 <div class="container" style="background-color:rgb(232,232,232);">
 	<div class="row">
 		<div class="col-md-12">
@@ -49,5 +46,4 @@
 			<hr />
 		</div>
 	</div>
-
 </div>

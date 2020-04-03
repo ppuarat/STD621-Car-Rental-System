@@ -2,14 +2,15 @@
 require_once(dirname(__DIR__) . "/models/Rental.php");
 require_once(dirname(__DIR__) . "/models/MySQLConnection.php");
 require_once(dirname(__DIR__) . "/controllers/CrudRepository.php");
+require_once(dirname(__DIR__) . "/controllers/CarsController.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $rental = new RentalController();
 
-    if ($_POST['functionName'] == "create") {
+    if ($_POST['functionName'] == "createRent") {
         $rental->create($_POST['car'], $_POST['fromDate'], $_POST['toDate'], $_POST['total']);
     }
-    if ($_POST['functionName'] == "approve") {
+    if ($_POST['functionName'] == "approveRent") {
         $rental->approve($_POST['rentalId'], $_POST['isApprove'], $_POST['desc']);
     }
 }
@@ -64,6 +65,7 @@ class RentalController
         $toDate = DateTime::createFromFormat('m/d/Y', $toDate);
         $fromDate = $fromDate->format('Y-m-d');
         $toDate = $toDate->format('Y-m-d');
+        $carsController = new CarsController();
 
         $carlId = $car['id'];
         //TODO-Get customer id from session
@@ -80,6 +82,7 @@ class RentalController
         if ($stmt->execute() == true) {
 
             echo "Booking success. Please wait for the confirmation email.";
+            $carsController->delete($carlId);
         } else {
             echo "Somthing went wrong!! Please contact our staff.";
         }

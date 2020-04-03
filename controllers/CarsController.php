@@ -9,11 +9,14 @@ require_once(dirname(__DIR__) . "/models/CarImage.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $carsController = new CarsController();
 
-    if ($_POST['functionName'] == "create") {
+    if ($_POST['functionName'] == "createCar") {
         $carsController->create();
     }
-    if ($_POST['functionName'] == "update") {
+    if ($_POST['functionName'] == "updateCar") {
         $carsController->update();
+    }
+    if ($_POST['functionName'] == "deleteCar") {
+        $carsController->delete($_POST['carId']);
     }
 }
 class CarsController
@@ -123,6 +126,30 @@ class CarsController
         }
     }
 
+    public function updateAvailable($id, $status)
+    {
+
+        $status = $status ? 1 : 0;
+
+        $conn = $this->mySQLConnector->getConnection();
+        $sql = "UPDATE cars SET is_available=?"
+            . " WHERE id=?;";
+        try {
+            if ($stmt = $conn->prepare($sql)) {
+                $stmt->bind_param(
+                    "ii",
+                    $status,
+                    $id
+                );
+                $stmt->execute();
+                return true;
+            }
+        } catch (Exception  $e) {
+            echo $e->getMessage();
+        }
+        return false;
+    }
+
     public function update()
     {
 
@@ -166,8 +193,12 @@ class CarsController
 
     public function delete($id)
     {
-
-        return $this->crudRepo->toggle("cars", $id);
+        if($this->crudRepo->toggle("cars", $id)){
+            echo "Update success";
+        }else{
+            echo "Something went wrong!";
+        }
+         
     }
 
     public function mapper($row)
